@@ -2,8 +2,7 @@
 
 ## Model
 
-![Class Diagram](https://raw.githubusercontent.com/LundOgBendsen/java-spring-boot-2023-02/main/jpaboot-01/src/main/documentation/order-example.puml)
-
+![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/LundOgBendsen/java-spring-boot-2023-02/main/jpaboot-01/src/main/documentation/order-example.puml)
 
 ```plantuml
 @startuml
