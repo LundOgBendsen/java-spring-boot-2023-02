@@ -32,6 +32,10 @@ class CustomerServiceImpl implements  CustomerService {
 
 class CustomerServiceFactory {
     //get a dynamic proxy for the CustomerService
+    //the proxy could be injected instead by a framework like Spring or CDI
+    //the proxy will delegate to the CustomerServiceInvocationHandler which delegates to the CustomerServiceImpl
+
+
     public static CustomerService getCustomerService() {
         return (CustomerService) java.lang.reflect.Proxy.newProxyInstance(
                 CustomerService.class.getClassLoader(),
@@ -49,7 +53,6 @@ class CustomerServiceFactory {
             method.setAccessible(true);
             Transactional transactional = method.getAnnotation(Transactional.class);
             EnumSet<TransactionType> required = EnumSet.of(TransactionType.REQUIRED, TransactionType.REQUIRES_NEW);
-
 
             if (required.contains(transactional)) {
                 System.out.println("Transaction started");
@@ -71,7 +74,6 @@ public class TxProxy {
     public static void main(String[] args) {
         //we get a dynamic proxy for the CustomerService.
         //The proxy could be injected instead by a framework like Spring or CDI
-        //Note
         CustomerService customerService = CustomerServiceFactory.getCustomerService();
         customerService.createCustomer("Donald");
         customerService.printCustomer("Ada");

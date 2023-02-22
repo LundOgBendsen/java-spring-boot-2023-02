@@ -52,6 +52,7 @@ public class PersonWriter {
     }
 
     private static String asJson(Person p) {
+        //explain next line:
         Field[] declaredFields = p.getClass().getDeclaredFields();
         StringBuilder sb = new StringBuilder("{\"")
                 .append(p.getClass().getSimpleName())
