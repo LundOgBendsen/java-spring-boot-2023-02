@@ -1,0 +1,26 @@
+@startuml
+title
+ Classic proxy design pattern, see https://en.wikipedia.org/wiki/Proxy_pattern
+end title
+
+interface BusinessService {
+    + void doProcessing()
+}
+
+class BusinessServiceImpl implements BusinessService {
+    + void doProcessing()
+}
+
+class Proxy implements BusinessService {
+    + void doProcessing()
+}
+
+class Client {
+
+}
+
+Proxy -> BusinessServiceImpl : Delegation
+Client -> BusinessService
+Client ..> Proxy : Gets a Proxy object
+
+@enduml

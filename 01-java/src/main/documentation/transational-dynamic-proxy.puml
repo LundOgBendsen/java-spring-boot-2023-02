@@ -1,0 +1,60 @@
+@startuml
+
+interface CustomerService {
+    + Customer save()
+    + void printCustomer()
+}
+
+class CustomerServiceImpl {
+  + Customer save()
+  + void printCustomer()
+}
+
+class TxProxy {
+    + main()
+}
+
+annotation Transactional {
+    + TransactionType value() default TransactionType.REQUIRED;
+}
+
+enum TransactionType {
+    + REQUIRED
+    + SUPPORTS
+    + MANDATORY
+    + REQUIRES_NEW
+    + NOT_SUPPORTED
+    + NEVER
+    + NESTED
+}
+
+class CustomerServiceFactory {
+  + CustomerService createCustomerService()
+}
+
+class CustomerServiceInvocationHandler {
+  + Object invoke(...)
+}
+
+note right of CustomerService::save
+  @Transactional(TransactionType.REQUIRED)
+end note
+
+note right of CustomerService::printCustomer
+  @Transactional(TransactionType.NOT_SUPPORTED)
+end note
+
+note left of TxProxy::main
+   Gets a proxy for CustomerService
+end note
+
+class CustomerServiceImpl implements CustomerService
+
+CustomerServiceFactory --> CustomerServiceInvocationHandler
+CustomerServiceInvocationHandler --> CustomerServiceImpl
+TxProxy --> CustomerServiceFactory
+Transactional --> TransactionType
+CustomerService --> Transactional
+CustomerServiceFactory --> CustomerService
+
+@enduml
