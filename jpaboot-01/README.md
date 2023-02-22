@@ -3,6 +3,7 @@
 ## Model
 
 ```plantuml
+@startuml
 skinparam class {
     BackgroundColor FloralWhite
 }
@@ -49,14 +50,8 @@ Person  *--> "0..*" Orders
 Orders  *--> "0..*" OrderLine
 OrderLine  *--> "1" Product
 
+@enduml
 ```
-
-Uddannelsessoegende  *--> "0..*" AndenOffentligStoettePeriode
-AndenOffentligStoettePeriode  *--> "1" AndenOffentligStoetteType
-Uddannelsessoegende  *--> "0..1" KommendeBarn
-Uddannelsessoegende  *--> "0..*" EkstraBoernetilskudPeriode
-```
-
 
 
 ### Reference Documentation
