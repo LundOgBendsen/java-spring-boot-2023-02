@@ -1,0 +1,21 @@
+@startuml
+
+interface Repository
+interface CrudRepository
+interface PagingAndSortingRepository
+interface JpaRepository
+interface ListPagingAndSortingRepository
+interface ListCrudRepository
+interface QueryByExampleExecutor
+
+
+
+Repository <|-- CrudRepository
+Repository <|-- PagingAndSortingRepository
+PagingAndSortingRepository <|-- ListPagingAndSortingRepository
+ListPagingAndSortingRepository <|-- JpaRepository
+CrudRepository  <|-- ListCrudRepository
+ListCrudRepository <|-- JpaRepository
+QueryByExampleExecutor <|-- JpaRepository
+
+@enduml

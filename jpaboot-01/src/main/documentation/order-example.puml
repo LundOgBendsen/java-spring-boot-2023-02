@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Person {
+    Long id
+    String name
+    String address
+    Date created
+}
+
+class Order {
+  Long id
+  Date created
+  String number
+  String name
+}
+
+class OrderLine {
+  Long id
+  Double quantity
+}
+
+class Product {
+  Long id
+  String name
+  Double price
+}
+
+class Supplier {
+  Long id
+  String name
+  String address
+}
+
+class ProductType {
+  Long id
+  String name
+}
+
+Person "1" <--> "*" Order
+Order "1" <--> "*" OrderLine
+OrderLine "1" --> "1" Product
+Product "*" <--> "*" Supplier
+Product "*" --> "1" ProductType
+
+@enduml
