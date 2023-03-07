@@ -4,56 +4,7 @@
 
 ![Class Diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/LundOgBendsen/java-spring-boot-2023-02/main/jpaboot-01/src/main/documentation/order-example.puml)
 
-```plantuml
-@startuml
-skinparam class {
-    BackgroundColor FloralWhite
-}
-
-class Person {
-    id : integer
-    name : string
-    address : string
-    created : timestamp
-}
-
-class Orders {
-    id : integer
-    order_date : date
-    number : string
-}
-
-class OrderLine {
-    id : integer
-    quantity : decimal
-    price : decimal
-}
-
-class Product {
-    id : integer
-    name : string
-    price : decimal
-}
-
-class ProductType {
-    id : integer
-    name : string
-}
-
-class Supplier {
-    id : integer
-    name : string
-    address : string
-}
-
-Product  "*" <--> "*" Supplier
-Product  "*" *--> "1" ProductType
-Person  *--> "0..*" Orders
-Orders  *--> "0..*" OrderLine
-OrderLine  *--> "1" Product
-
-@enduml
-```
+## REST endpoints
 
 
 ### Reference Documentation

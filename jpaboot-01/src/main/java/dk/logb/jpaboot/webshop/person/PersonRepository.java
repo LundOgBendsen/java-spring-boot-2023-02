@@ -12,5 +12,4 @@ public interface PersonRepository<T extends Person , Long extends Serializable>
         extends JpaRepository<T , Long> {
     List<Person> findByName(String name);
 
-    //Person findByIdWithOrdersWithOrderLineWithProductWithSupplier(long id);
 }
