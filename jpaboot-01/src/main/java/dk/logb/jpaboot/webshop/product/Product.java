@@ -2,9 +2,7 @@ package dk.logb.jpaboot.webshop.product;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Product {
@@ -25,7 +23,7 @@ public class Product {
                     name = "product_id",
                     referencedColumnName = "id"
             ))
-    private List<Supplier> suppliers = new ArrayList<>();
+    private Set<Supplier> suppliers = new HashSet<>();
 
     @OneToOne
     private ProductType productType;
@@ -58,11 +56,11 @@ public class Product {
         this.price = price;
     }
 
-    public List<Supplier> getSuppliers() {
+    public Set<Supplier> getSuppliers() {
         return suppliers;
     }
 
-    public void setSuppliers(List<Supplier> suppliers) {
+    public void setSuppliers(Set<Supplier> suppliers) {
         this.suppliers = suppliers;
     }
 

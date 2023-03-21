@@ -1,15 +1,12 @@
 package dk.logb.jpaboot.webshop;
 
-import dk.logb.jpaboot.webshop.order.OrderLine;
-import dk.logb.jpaboot.webshop.order.OrderServiceFacade;
+import dk.logb.jpaboot.webshop.order.*;
 import dk.logb.jpaboot.webshop.person.PersonRepository;
 import dk.logb.jpaboot.webshop.document.DocumentRepository;
-import dk.logb.jpaboot.webshop.order.OrderRepository;
 import dk.logb.jpaboot.webshop.product.Product;
 import dk.logb.jpaboot.webshop.product.ProductService;
 import dk.logb.jpaboot.webshop.product.SupplierService;
 import dk.logb.jpaboot.webshop.document.Document;
-import dk.logb.jpaboot.webshop.order.Order;
 import dk.logb.jpaboot.webshop.person.Person;
 import dk.logb.jpaboot.webshop.product.Supplier;
 import jakarta.persistence.EntityManager;
@@ -51,7 +48,13 @@ public class JpabootApplication implements CommandLineRunner {
 	ProductService productService;
 
 	@Autowired
+	OrderDataService odService;
+
+	@Autowired
 	private PlatformTransactionManager transactionManager;
+
+	//@Autowired
+	//CustomOrderRepository customOrderRepository;
 
 	@PersistenceContext
 	EntityManager em;
@@ -67,7 +70,7 @@ public class JpabootApplication implements CommandLineRunner {
 		personRepository.save(new Person("Ida", "Gyden 34, Hillerød"));
 		personRepository.save(new Person("Sue", "Krogen 222, Holte"));
 		queryExamples();
-
+		odService.jpaHell();
 	}
 
 	private void queryExamples() throws IOException {

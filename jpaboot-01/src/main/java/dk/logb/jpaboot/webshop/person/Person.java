@@ -1,26 +1,31 @@
 package dk.logb.jpaboot.webshop.person;
 
-//jpa entity
-
-
 import dk.logb.jpaboot.webshop.order.Order;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@NamedQuery(name = "Person.findByIdWithOrdersAndOrderLinesAndProducts",
+        query = """
+                SELECT DISTINCT p FROM Person p LEFT JOIN FETCH p.orders o 
+                LEFT JOIN FETCH o.orderLines ol LEFT JOIN FETCH ol.product prod 
+                LEFT JOIN FETCH prod.suppliers where p.id = :id
+                """
+        )
+@NamedQuery(name = "Person.findByName", query = "SELECT p FROM Person p WHERE p.name = :name")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Basic(fetch = FetchType.LAZY)
     private String address;
     private LocalDateTime created = LocalDateTime.now();
     @OneToMany(mappedBy = "person", cascade = {CascadeType.MERGE, CascadeType.PERSIST,CascadeType.REFRESH,
-            CascadeType.DETACH})
-    List<Order> orders = new ArrayList<>();
+            CascadeType.DETACH}, fetch = FetchType.LAZY)
+    Set<Order> orders = new HashSet<>();
 
     public Person() {
     }
@@ -52,11 +57,11 @@ public class Person {
         this.name = name;
     }
 
-    public List<Order> getOrders() {
+    public Set<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 
